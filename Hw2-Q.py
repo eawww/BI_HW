@@ -8,9 +8,9 @@ import sys
 
 def main():
     # Input filename and Output filename
-    input_file = sys.argv[1]
-    output_file = sys.argv[2]
-    num_iterations = sys.argv[3]
+    input_file = sys.argv[0]
+    output_file = sys.argv[1]
+    #num_iterations = sys.argv[2]
 
     #make sure we've got the right things
     print("Input:" + input_file + "\nOutput:" + output_file)
@@ -22,6 +22,8 @@ def main():
     # Declaration for Array, array length, and the comparison sequences
     temp = []
     motifSequence = ""
+    bestMotifScore = 0
+    bestMotif =""
     seedscore = 0
     score = 0
     seed_string = ""
@@ -42,7 +44,7 @@ def main():
     # done processing input
 
     #OUTER LOOP WILL START HERE
-    
+
     indexA = 0 #will be random
     indexB = 1 #will be random
 
@@ -56,9 +58,24 @@ def main():
                 seedA = substringA
                 seedB = substringB
     seed_string = findMedianString(seedA, seedB)
+    print(seed_string)
 
     #NOW we need to iterate over all the other strings and see what their best match is
-    #so do that here.
+
+    currentMotifMaxScore = 0
+
+    for k in range(0, len(temp)-1): #select row
+        thisstrmaxscore = 0
+        for m in range(0, len(temp[k]-8)):
+            score = compareFunction(seed_string, temp[k][m:m+8])
+            if (score > thisstrmaxscore):
+                thisstrmaxscore = score
+        currentMotifMaxScore += thisstrmaxscore
+    if (currentMotifMaxScore > bestMotifScore):
+        bestMotifScore = currentMotifMaxScore
+        bestMotif = seed_string
+
+
     # Close the input and output files
     fin.close()
     fout.close()

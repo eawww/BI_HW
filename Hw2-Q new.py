@@ -86,9 +86,20 @@ def main():
             if (score > bestScore):
                 bestScore = score
                 motifSequence = subStringA #????
-                
 
-    
+    # For each of the remaining sequences in the array
+    for k in range(2, temp.length() - 1):
+        stringA = temp[k]
+        # Make all their possible 8mers
+        for m in range(0, 9):
+            subStringA = stringA.subString(n, n + 8)
+            # Score the comparision of current 8mer to the median string
+            score = compareFuntion(medianString, subStringA)
+            #
+            if (score > bestScore):
+                bestScore = score
+                # The motif sequences becomes the highest scoring 8mer
+                motifSequence = subStringA  ???????`
 
         
         
