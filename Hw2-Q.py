@@ -75,6 +75,8 @@ def main():
         bestMotifScore = currentMotifMaxScore
         bestMotif = seed_string
 
+    print("Best Motif Score:" + bestMotifScore + "\nBest Motif:" + bestMotif)
+
 
     # Close the input and output files
     fin.close()
