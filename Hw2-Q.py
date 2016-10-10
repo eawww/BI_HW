@@ -5,25 +5,43 @@
 
 import sys
 
-# Input filename and Output filename
-InputFile = sys.argv[1]
-OutputFile = sys.argv[2]
-
-# Opens the input and output files
-fin = open(str(InputFile), "r")
-fout = open(str(OutputFile), "w")
-
-# Declaration for Array, array length, and the comparison sequences
-temp = []
-motifSequence = ""
-bestScore = 0
-score = 0
-medianString = ""
-bestSubStringA = ""
-bestSubStringB = ""
-
 
 def main():
+    # Input filename and Output filename
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+
+    #make sure we've got the right things
+    print("Input:" + input_file + "\nOutput:" + output_file)
+
+    # Opens the input and output files
+    fin = open(str(input_file), "r")
+    fout = open(str(output_file), "w")
+
+    # Declaration for Array, array length, and the comparison sequences
+    temp = []
+    motifSequence = ""
+    bestScore = 0
+    score = 0
+    medianString = ""
+    bestSubStringA = ""
+    bestSubStringB = ""
+
+    for line in fin.readlines():
+        # Add each line in the file (each sequence) into the array
+        temp.append(line)
+
+    # Remove the header from the sequences
+    for line in fin.readlines():
+        # Add each line in the file (each sequence) into the array
+        temp.append(line)
+
+    # Delete the first line and strip newline characters off remaining strings
+    del temp[0]
+
+    for line in temp:
+        line = line.strip();
+
     for i in range(0, temp.length() - 1):
         stringA = temp[i]
         for j in range(1, temp.length() - 1):
@@ -69,18 +87,3 @@ def findMedianString(a, b):
             medianString.append('-')
 
     return medianString
-
-
-# Remove the header from the sequences
-for line in fin.readlines():
-    # Add each line in the file (each sequence) into the array
-    temp.append(line)
-
-# Delete the first line and strip newline characters off remaining strings
-del temp[0]
-
-for line in temp:
-    line = line.strip();
-
-
-# Loop through the first two seqeuences and find the best scoring 8mers
