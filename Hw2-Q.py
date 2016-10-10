@@ -10,6 +10,7 @@ def main():
     # Input filename and Output filename
     input_file = sys.argv[1]
     output_file = sys.argv[2]
+    num_iterations = sys.argv[3]
 
     #make sure we've got the right things
     print("Input:" + input_file + "\nOutput:" + output_file)
@@ -21,15 +22,12 @@ def main():
     # Declaration for Array, array length, and the comparison sequences
     temp = []
     motifSequence = ""
-    bestScore = 0
+    seedscore = 0
     score = 0
-    medianString = ""
-    bestSubStringA = ""
-    bestSubStringB = ""
+    seed_string = ""
+    seedA = ""
+    seedB = ""
 
-    for line in fin.readlines():
-        # Add each line in the file (each sequence) into the array
-        temp.append(line)
 
     # Remove the header from the sequences
     for line in fin.readlines():
@@ -41,24 +39,26 @@ def main():
 
     for line in temp:
         line = line.strip();
+    # done processing input
 
-    for i in range(0, temp.length() - 1):
-        stringA = temp[i]
-        for j in range(1, temp.length() - 1):
-            stringB = temp[j]
-            for k in range(0, 9):
-                subStringA = stringA.subString(k, k + 8)
-                for l in range(0, 9):
-                    subStringB = stringB.subString(l, l + 8)
-                    score = compareFunction(subStringA, subStringB)
-                    if (score > bestScore):
-                        bestScore = score
-                        bestSubStringA = subStringA
-                        bestSubStringB = subStringB
+    #OUTER LOOP WILL START HERE
+    
+    indexA = 0 #will be random
+    indexB = 1 #will be random
 
-    # Then find the median string given the two subStrings of the best scoring 8mers
-    findMedianString(bestSubStringA, bestSubStringB)
+    for i in range(0, indexA - 8):
+        substringA = temp[indexA][i:i+8]
+        for j in range(0, indexB - 8):
+            substringB = temp[indexB][j:j+8]
+            score = compareFunction(substringA,substringB)
+            if (score > seedscore):
+                seedscore = score
+                seedA = substringA
+                seedB = substringB
+    seed_string = findMedianString(seedA, seedB)
 
+    #NOW we need to iterate over all the other strings and see what their best match is
+    #so do that here.
     # Close the input and output files
     fin.close()
     fout.close()

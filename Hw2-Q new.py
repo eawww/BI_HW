@@ -6,12 +6,15 @@
 import sys
 
 #Input filename and Output filename 
-InputFile = sys.argv[1]
-OutputFile = sys.argv[2]
+input_file = sys.argv[1]
+output_file = sys.argv[2]
+
+#make sure we've got the right things
+print("Input:" + input_file + "\nOutput:" + output_file)
 
 #Opens the input and output files
-fin = open(str(InputFile), "r")
-fout = open(str(OutputFile), "w")
+fin = open(str(input_file), "r")
+fout = open(str(output_file), "w")
 
 #Declaration for Array, array length, and the comparison sequences
 temp = []
@@ -36,7 +39,7 @@ def compareFunction(a, b):
 
 def findMedianString(a, b):
     medianString = ""
-    int i = 0
+    i = 0
     while (i < a.length()):
         if(a[i] == b[i]):
             medianString.append(i)
