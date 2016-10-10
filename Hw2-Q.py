@@ -8,8 +8,8 @@ import sys
 
 def main():
     # Input filename and Output filename
-    input_file = sys.argv[0]
-    output_file = sys.argv[1]
+    input_file = "SequenceInput.txt" #sys.argv[0]
+    output_file = "output.txt"#sys.argv[1]
     #num_iterations = sys.argv[2]
 
     #make sure we've got the right things
@@ -106,3 +106,5 @@ def findMedianString(a, b):
             medianString.append('-')
 
     return medianString
+
+main()
