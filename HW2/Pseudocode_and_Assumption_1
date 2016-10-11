@@ -3,6 +3,7 @@
 1. 
 Pseudocode:
 
+MAIN FUNCTION:
 -Save the input filename, output filename, and desired number of iterations from command line
 -Open the correct input file and output file
 -For each line in the file
@@ -38,3 +39,24 @@ Pseudocode:
 	-Output results from this iteration to file
 -Output to file the best motif for the set of sequences
 -close i/o
+
+COMPARE FUNCTION (a,b)
+-set index and score to 0
+-While (index is less than length of string array)
+	-if(character in string a == character in string b)
+		score++
+		index++
+	-else
+		index++
+-return score
+
+MEDIAN STRING FUNCTION
+-set median string to "" and index to 0
+-while(index < length of on of the strings)
+	-if(pos at index is same in both strings)
+		add that character to median string
+	-else
+		add dash
+	-index++
+-return medianstring
+
