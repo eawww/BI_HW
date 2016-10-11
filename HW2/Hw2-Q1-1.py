@@ -85,7 +85,7 @@ def main():
         if (currentMotifMaxScore > bestMotifScore):
             bestMotifScore = currentMotifMaxScore
             bestMotif = seed_string
-        outfile.write("(" + str(indexA) + "," + str(indexB) + "):" + seed_string + ":--" + str(currentMotifMaxScore))
+        outfile.write("(" + str(indexA) + "," + str(indexB) + "):" + seed_string + ":--" + str(currentMotifMaxScore) + "\n")
 
     outfile.write("BEST MOTIF: " + bestMotif)
 
