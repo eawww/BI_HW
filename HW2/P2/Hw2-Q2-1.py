@@ -1,3 +1,11 @@
+#Bioinformatics CS466 HW2
+#Bridget Mohn and Eric Wilson
+#Instructor: Dinakarpandian
+#2016-10-12
+
+#Problem1 (P1)
+#Recovers best motif from set of biological sequences using CONSENSUS style algorithm
+
 import sys
 
 def main():
