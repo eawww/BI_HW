@@ -2,8 +2,10 @@ import sys
 
 def main():
     #get input
-    input_file = "input2.txt"#sys.argv[1]
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
     fin = open(str(input_file), "r")
+    fout = open(str(output_file), "w")
     strings = []
     for line in fin.readlines():
         strings.append(line)
@@ -48,5 +50,9 @@ def main():
     #find sum for each key (valueA - B)^2  or ABS(valueA - valueB) -- this will be our score
     #output score
 
+    fout.write("Input:\n" + strings[0] + "\n" + strings [1] + "\n")
+    fout.write("Score: " + str.format("{0:.3f}", delta_sum))
+
+    fout.close()
     fin.close()
 main()
