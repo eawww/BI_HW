@@ -3,8 +3,8 @@
 #Instructor: Dinakarpandian
 #2016-10-12
 
-#Problem1 (P1)
-#Recovers best motif from set of biological sequences using CONSENSUS style algorithm
+#Problem2 (P2)
+#Computes similarity of two sequences based on their 2-mer composition
 
 import sys
 
