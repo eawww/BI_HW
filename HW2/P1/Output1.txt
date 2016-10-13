@@ -1,0 +1,13 @@
+(11,4):ttta-tat:--60
+(10,5):a--atttt:--48
+(4,8):tt--ctat:--54
+(2,9):c-ag-tct:--46
+(11,6):tgt-tat-:--52
+(3,2):-t-cta-t:--49
+(8,10):ttgt-tat:--57
+(6,9):--tcta-t:--49
+(9,5):c-att-tt:--54
+(0,11):-a-tattt:--54
+(11,10):ttgtttat:--62
+(1,2):t-ctagtt:--59
+BEST MOTIF: ttgtttat
