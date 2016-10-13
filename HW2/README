@@ -14,7 +14,7 @@ How to run:
     - must have Python 3.x installed on machine
     - In command line, navigate to directory containing script and input file
     - use command:
-        python Hw2-Q1-1 [input file] [output file] [desired iterations]
+        python Hw2-Q1-1 [input file] [output file] [desired iterations] [target motif length]
     - Output describes sets of randomly selected strings from input file,
         scores for each set
         maximum score and best motif corresponding to that score
