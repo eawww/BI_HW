@@ -10,9 +10,10 @@ from random import randint
 
 def main():
     # Input filename and Output filename
-    input_file = "SequenceInput2.txt"
-    output_file = "output3.txt"
-    num_iterations = 100#sys.argv[3]
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    num_iterations = sys.argv[3]
+    motif_len = sys.argv[4]
 
     # make sure we've got the right things
     print("Input: " + input_file + " Output: " + output_file + " \niter: " + str(num_iterations))
@@ -59,10 +60,10 @@ def main():
             indexB = randint(0, len(temp) - 1)
 
 
-        for i in range(0, len(temp[indexA])-8):
-            substringA = temp[indexA][i:i + 8]
-            for j in range(0, len(temp[indexB])-8):
-                substringB = temp[indexB][j:j + 8]
+        for i in range(0, len(temp[indexA])-int(motif_len)):
+            substringA = temp[indexA][i:i + int(motif_len)]
+            for j in range(0, len(temp[indexB])-int(motif_len)):
+                substringB = temp[indexB][j:j + int(motif_len)]
                 score = compareFunction(substringA, substringB)
                 if (score > seedscore):
                     seedscore = score
@@ -77,8 +78,8 @@ def main():
 
         for k in range(0, len(temp)):  # select row
             thisstrmaxscore = 0
-            for m in range(0, len(temp[k])-8):
-                score = compareFunction(seed_string, temp[k][m:m + 8])
+            for m in range(0, len(temp[k])-int(motif_len)):
+                score = compareFunction(seed_string, temp[k][m:m + int(motif_len)])
                 if (score > thisstrmaxscore):
                     thisstrmaxscore = score
             currentMotifMaxScore += thisstrmaxscore
