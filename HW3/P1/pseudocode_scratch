@@ -1,0 +1,10 @@
+Create dictionary of dictionaries each with an entry for each possible character
+    Keys in main dictionary and each subdictionary are the letters
+//matrix = {}
+//characters = ['A','B','C','D'...
+//counts = {}
+//populate counts with letter keys and 0s.
+//read and parse all sequences into array of strings
+//iterate over all strings counting
+Read in each sequence
+
