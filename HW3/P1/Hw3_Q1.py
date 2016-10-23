@@ -6,6 +6,7 @@
 
 import sys
 import math
+from collections import OrderedDict
 
 #Input filename and output filename is taken from the command line
 InputFile = "input2" #sys.argv[1]
@@ -21,8 +22,8 @@ poss_char = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M',
              'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 #Dictionaries for substitution matrix, counts, and sequences
-AASM = {}
-counts = {}
+AASM = OrderedDict()
+counts = OrderedDict()
 sequences = []
 
 totalAA = 0
@@ -122,11 +123,13 @@ def outputMatrix():
         fout.write(str(key1) + "  ")
         for key2, val2 in val1.items():
             value = str.format("{0:.3f}", AASM[key1][key2])
-            fout.write(value)
             if (value[0] == '-'):
+                fout.write(value)
                 fout.write("  ")
             else:
-                fout.write("   ")
+                fout.write(" ")
+                fout.write(value)
+                fout.write("  ")
         fout.write("\n")
 #call main function to start program
 main()
