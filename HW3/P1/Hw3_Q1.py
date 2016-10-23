@@ -68,7 +68,7 @@ def populateDictionaries():
     # Populate the dictionaries
     for character in poss_char:
         counts[character] = 0
-        AASM[character] = {}  # Nested dictionaries make up the matrix
+        AASM[character] = OrderedDict()  # Nested dictionaries make up the matrix
         for character2 in poss_char:
             AASM[character][character2] = 0
 
