@@ -136,8 +136,11 @@ def calculateMatrixValues():
     logfile.write("\nCalculating matrix values: ( lg(p(A,B)/(p(A)p(B))) )\n")
     for key1, val1 in AASM.items():
         for key2, val2 in val1.items():
-            if (counts[key1] != 0.0) and (counts[key2] != 0.0):
-                AASM[key1][key2] = math.log(val2/(counts[key1] * counts[key2]), 2)
+            if (counts[key1] > 0.0) and (counts[key2] > 0.0) and (val2 > 0.0):
+                probA = counts[key1]
+                probB = counts[key2]
+                pABoverpApB = val2/(probA * probB)
+                AASM[key1][key2] = math.log(pABoverpApB, 2)
     #logging
     logfloatMatrix()
     logfile.write("\n\n")
