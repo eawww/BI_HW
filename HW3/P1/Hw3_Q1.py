@@ -52,7 +52,7 @@ def parseInput():
     templine = ""
     for line in fin.readlines():
         if line[0] == '>':
-            logfile.write("Reading aligned sequence " + line + "\n")
+            logfile.write("Reading aligned sequence " + line)
         elif (line == "\n"):
             # denotes end of sequence
             # mash them all into one string and add it to sequences
