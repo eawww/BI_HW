@@ -9,8 +9,8 @@ import math
 from collections import OrderedDict
 
 #Input filename and output filename is taken from the command line
-InputFile = "input2" #sys.argv[1]
-OutputFile = "output2" #sys.argv[2]
+InputFile = sys.argv[1]
+OutputFile = sys.argv[2]
 
 #Opens the input and output file
 fin = open(str(InputFile), "r")
@@ -41,6 +41,10 @@ def main():
     calculateMatrixValues()
     outputMatrix()
 
+    fout.close()
+    fin.close()
+    logfile.close()
+
 # read in and parse sequences into usable data
 # assumes all sequences are delimited by '>' line at top and empty line at bottom
 def parseInput():
@@ -48,7 +52,7 @@ def parseInput():
     templine = ""
     for line in fin.readlines():
         if line[0] == '>':
-            print("Reading aligned sequence " + line)
+            logfile.write("Reading aligned sequence " + line + "\n")
         elif (line == "\n"):
             # denotes end of sequence
             # mash them all into one string and add it to sequences
@@ -66,6 +70,7 @@ def parseInput():
 
 def populateDictionaries():
     # Populate the dictionaries
+    logfile.write("Populating Dictionaries\n")
     for character in poss_char:
         counts[character] = 0
         AASM[character] = OrderedDict()  # Nested dictionaries make up the matrix
@@ -74,44 +79,68 @@ def populateDictionaries():
 
 #counts number of occurrences of each character in all sequences
 def countAAinstances():
+    logfile.write("\nCounting amino acid occurrences:\n")
     global totalAA
     for sequence in sequences:
         for character in sequence:
             if character != '-':
                 totalAA += 1
                 counts[character] += 1
+    #logging
+    for key, value in counts.items():
+        logfile.write("(" + str(key) + "," + str(value) + ")")
+    logfile.write("\nTotal Amino Acids: " + str(totalAA) + "\n\n")
 
 
 def countPairInstances():
     global totalPairs
+    logfile.write("Counting pair occurrences:\n")
     for i in range(0, len(sequences) - 1):
-        for j in range (i, len(sequences) - 1):
+        for j in range (i + 1, len(sequences) - 1):
             if i != j:
                 for k in range (0, len(sequences[i])-1):
                     if (sequences[i][k] != '-') and (sequences[j][k] != '-'):
                         #increment both corresponding entries in matrix
                         AASM[sequences[i][k]][sequences[j][k]] += 1
-                        AASM[sequences[j][k]][sequences[i][k]] += 1
+                        if sequences[i][k] != sequences[j][k]:
+                            AASM[sequences[j][k]][sequences[i][k]] += 1
                         totalPairs += 1
+    #logging
+    logintMatrix()
+    logfile.write("Total pairs:" + str(totalPairs) + "\n")
 
 
 def calculateAAprobabilities():
+    logfile.write("\nCalculating amino Acid Probabilities:\n")
     for key, value in counts.items():
         counts[key] = value/totalAA
+    #logging
+    for key, value in counts.items():
+        formattedValue = str.format("{0:.3f}", value)
+        logfile.write("(" + str(key) + "," + formattedValue + ")")
+    logfile.write("\n\n")
 
 
 
 def calculatePairProbabilities():
+    logfile.write("\nCalculating pair probabilities:\n")
     for key1, val1 in AASM.items():
         for key2, val2 in val1.items():
             AASM[key1][key2] = val2/totalPairs
+    #logging
+    logfloatMatrix()
+    logfile.write("\n\n")
 
 
 def calculateMatrixValues():
+    logfile.write("\nCalculating matrix values: ( lg(p(A,B)/(p(A)p(B))) )\n")
     for key1, val1 in AASM.items():
         for key2, val2 in val1.items():
             if (counts[key1] != 0.0) and (counts[key2] != 0.0):
                 AASM[key1][key2] = math.log(val2/(counts[key1] * counts[key2]), 2)
+    #logging
+    logfloatMatrix()
+    logfile.write("\n\n")
 
 
 def outputMatrix():
@@ -131,5 +160,44 @@ def outputMatrix():
                 fout.write(value)
                 fout.write("  ")
         fout.write("\n")
+    logfile.write("Result substitution matrix output to file \"" + OutputFile + "\"\nHave a nice day!")
+
+
+def logintMatrix():
+    logfile.write("   ")
+    for character in poss_char:
+        logfile.write("   " + character + "    ")
+    logfile.write("\n")
+    for key1, val1 in AASM.items():
+        logfile.write(str(key1) + "  ")
+        for key2, val2 in val1.items():
+            value = '{0: <5}'.format(str(val2))
+            if (value[0] == '-'):
+                logfile.write(value)
+                fout.write("  ")
+            else:
+                logfile.write(" ")
+                logfile.write(value)
+                logfile.write("  ")
+        logfile.write("\n")
+
+
+def logfloatMatrix():
+    logfile.write("   ")
+    for character in poss_char:
+        logfile.write("   " + character + "    ")
+    logfile.write("\n")
+    for key1, val1 in AASM.items():
+        logfile.write(str(key1) + "  ")
+        for key2, val2 in val1.items():
+            value = str.format("{0:.3f}", AASM[key1][key2])
+            if (value[0] == '-'):
+                logfile.write(value)
+                logfile.write("  ")
+            else:
+                logfile.write(" ")
+                logfile.write(value)
+                logfile.write("  ")
+        logfile.write("\n")
 #call main function to start program
 main()
