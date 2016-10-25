@@ -1,8 +1,8 @@
 #gonna read in stuff and find correlation, yo.
+#specifically, finds correlation coefficient between output from Hw3_Q1.py
+#and BLOSUM62 matrix and outputs it to CLI
+#Eric Wilson 2016-10-25 eawww0@gmail.com
 
-#read in all input into two identical nested dicts
-
-#table1 is X, table 2 is Y
 import sys
 import math
 
